@@ -30,6 +30,7 @@ function Header() {
             onChange={handleChange}
             fullWidth
           >
+            <MenuItem value="AL">All invoices</MenuItem>
             <MenuItem value="DR">Draft</MenuItem>
             <MenuItem value="PN">Pending</MenuItem>
             <MenuItem value="PD">Paid</MenuItem>
@@ -37,7 +38,13 @@ function Header() {
         </Box>
       </div>
       <div className={styles.new_invoice}>
-        <Button variant="contained" color="primary" onClick={handleClick}>
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={handleClick}
+          size="small"
+        >
           New Invoice
           <NewInvoice />
         </Button>

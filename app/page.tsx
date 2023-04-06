@@ -4,7 +4,8 @@ import styles from "./page.module.css";
 import Bar from "@/components/Bar/Bar";
 import Header from "@/components/Header/Header/Header";
 import ItemList from "@/components/ItemList/ItemList";
-import NewInvoice from "@/components/NewInvoice/NewInvoice";
+
+import { DatePicker } from "@mui/x-date-pickers";
 
 const inter = Inter({ subsets: ["latin"] });
 
