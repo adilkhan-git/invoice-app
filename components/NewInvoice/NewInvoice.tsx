@@ -19,12 +19,28 @@ import {
 
 import EventIcon from "@mui/icons-material/Event";
 
+interface NewInvoiceProps {
+  setInvoices: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
 type ItemFieldName = "name" | "quantity" | "price";
 
-function NewInvoice() {
+function NewInvoice(props: NewInvoiceProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [items, setItems] = useState([{ name: "", quantity: "", price: "" }]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [invoices, setInvoices] = useState<string[]>([]);
+  const [newInvoices, setNewInvoices] = useState<string>("");
+
+  const [streetAddressFrom, setStreetAddressFrom] = useState("");
+  const [cityFrom, setCityFrom] = useState("");
+  const [postCodeFrom, setPostCodeFrom] = useState("");
+  const [countryFrom, setCountryFrom] = useState("");
+
+  const handleSave = () => {
+    setInvoices([...invoices, newInvoices]);
+    setNewInvoices("");
+  };
 
   const handleDateChange = (date: Date) => {
     setSelectedDate(date);
@@ -38,6 +54,13 @@ function NewInvoice() {
     const newItems = [...items];
     newItems.splice(index, 1);
     setItems(newItems);
+  };
+
+  const handleDiscard = () => {
+    setStreetAddressFrom("");
+    setCityFrom("");
+    setPostCodeFrom("");
+    setCountryFrom("");
   };
 
   const handleItemChange = (
@@ -73,13 +96,28 @@ function NewInvoice() {
             <Typography variant="h6" component="div">
               Bill from
             </Typography>
-            <TextField fullWidth label="Street address" />
+            <TextField
+              fullWidth
+              label="Street address"
+              value={streetAddressFrom}
+              onChange={(e) => setStreetAddressFrom(e.target.value)}
+            />
             <Grid container spacing={2}>
               <Grid item xs={12} sm={4} sx={{ marginTop: 2 }}>
-                <TextField fullWidth label="City" />
+                <TextField
+                  fullWidth
+                  label="City"
+                  value={cityFrom}
+                  onChange={(e) => setCityFrom(e.target.value)}
+                />
               </Grid>
               <Grid item xs={12} sm={4} sx={{ marginTop: 2 }}>
-                <TextField fullWidth label="Post Code" />
+                <TextField
+                  fullWidth
+                  label="Post Code"
+                  value={postCodeFrom}
+                  onChange={(e) => setPostCodeFrom(e.target.value)}
+                />
               </Grid>
               <Grid item xs={12} sm={4} sx={{ marginTop: 2 }}>
                 <TextField fullWidth label="Country" />
@@ -200,13 +238,15 @@ function NewInvoice() {
             </Box>
           </Box>
           <Box mt={4} display="flex" justifyContent="flex-end">
-            <Button variant="outlined">Discard</Button>
+            <Button variant="outlined" onClick={handleDiscard}>
+              Discard
+            </Button>
             <Box mx={1} />
             <Button variant="contained" color="primary">
               Save as Draft
             </Button>
             <Box mx={1} />
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={handleSave}>
               Save & Send
             </Button>
           </Box>

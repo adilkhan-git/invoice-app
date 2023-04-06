@@ -1,20 +1,15 @@
-import React from "react";
-import { Inter } from "next/font/google";
 import styles from "./page.module.css";
 import Bar from "@/components/Bar/Bar";
+import Display from "@/components/Display/Display";
 import Header from "@/components/Header/Header/Header";
-import ItemList from "@/components/ItemList/ItemList";
-
-import { DatePicker } from "@mui/x-date-pickers";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  // const [invoices, setInvoices] = useState<string[]>([]);
   return (
     <main className={styles.main}>
       <Bar />
       <Header />
-      <ItemList />
+      <Display />
     </main>
   );
 }
