@@ -21,12 +21,13 @@ import EventIcon from "@mui/icons-material/Event";
 
 interface NewInvoiceProps {
   setInvoices: React.Dispatch<React.SetStateAction<string[]>>;
+  isDrawerOpen: boolean;
+  setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type ItemFieldName = "name" | "quantity" | "price";
 
 function NewInvoice(props: NewInvoiceProps) {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [items, setItems] = useState([{ name: "", quantity: "", price: "" }]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [invoices, setInvoices] = useState<string[]>([]);
@@ -72,21 +73,13 @@ function NewInvoice(props: NewInvoiceProps) {
     newItems[index][field] = event.target.value;
     setItems(newItems);
   };
+
   return (
     <>
-      <IconButton
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="logo"
-        onClick={() => setIsDrawerOpen(true)}
-      >
-        <AddCircleOutline fontSize="medium" />
-      </IconButton>
       <Drawer
         anchor="left"
-        open={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
+        open={props.isDrawerOpen}
+        onClose={() => props.setIsDrawerOpen(false)}
       >
         <Box p={2} width="616px" role="presentation">
           <Typography variant="h6" component="div">

@@ -2,18 +2,25 @@
 import NewInvoice from "@/components/NewInvoice/NewInvoice";
 import styles from "../Header/Header.module.css";
 
-import { Select, Box, TextField, MenuItem, Button } from "@mui/material";
+import {
+  Select,
+  Box,
+  TextField,
+  MenuItem,
+  Button,
+  IconButton,
+} from "@mui/material";
 
 import React, { useState } from "react";
+import { AddCircleOutline } from "@mui/icons-material";
 
 function Header() {
   const [status, setStatus] = useState("");
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setStatus(event.target.value as string);
   };
-  const handleClick = () => {
-    // обработчик клика кнопки "New Invoice"
-  };
+
   return (
     <div>
       <div className={styles.heading}>
@@ -42,13 +49,19 @@ function Header() {
           fullWidth
           variant="contained"
           color="primary"
-          onClick={handleClick}
-          size="small"
+          onClick={() => setIsDrawerOpen(true)}
+          size="medium"
         >
+          <AddCircleOutline fontSize="medium" />
           New Invoice
-          <NewInvoice />
         </Button>
       </div>
+
+      <NewInvoice
+        setInvoices={() => {}}
+        isDrawerOpen={isDrawerOpen}
+        setIsDrawerOpen={setIsDrawerOpen}
+      />
     </div>
   );
 }
